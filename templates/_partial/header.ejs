@@ -13,12 +13,12 @@
   <meta property="og:site_name" content="Free Font 商用免费字体下载">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wangchujiang.com/free-font/<%=pageurl%>">
-  <meta property="og:image" content="https://wangchujiang.com/icons/banner.jpeg">
+  <meta property="og:image" content="https://wangchujiang.com/free-font/<%=ogImage%>">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="Kenny Wang">
   <meta name="twitter:title" content="<%=title%>">
   <meta name="twitter:description" content="<%=description%>">
-  <meta name="twitter:image" content="https://wangchujiang.com/icons/banner.jpeg">
+  <meta name="twitter:image" content="https://wangchujiang.com/free-font/<%=ogImage%>">
   <link rel="stylesheet" type="text/css" href="<%= PUBLIC_PATH %>css/main.css?v=<%=GLOBAL.PACKAGE.version%>">
   <% if (/(preview)/.test(type)) { %><link rel="stylesheet" type="text/css" href="<%= PUBLIC_PATH %>css/preview.css?v=<%=GLOBAL.PACKAGE.version%>"><% } %>
   <script type="application/ld+json">
@@ -26,7 +26,7 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Free Font 商用免费字体下载",
-    "url": "https://wangchujiang.com/free-font/",
+    "url": "<%= PUBLIC_PATH %>",
     "description": "收录商用免费艺术体字体，包括中文与英文字体，支持商用，免费下载使用。",
     "author": {
       "@type": "Person",
