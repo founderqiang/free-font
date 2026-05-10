@@ -17,20 +17,25 @@ function containsNoChineseCharacters(str) {
   return !chineseCharacterPattern.test(str);
 }
 
-const chineseCharacterContent = `<div class="poem">
-  <div class="poem-title">《江雪》<i class="poet">柳宗元</i></div>
-  <div class="poem-content">
-    千山鸟飞绝，万径人踪灭。<br/>
-    孤舟蓑笠翁，独钓寒江雪。
-  </div>
-</div>
-<div class="poem">
-  <div class="poem-title">《江雪》<i class="poet">柳宗元</i></div>
-  <div class="poem-content">
-    千山鳥飛絕，萬徑人蹤滅。<br/>
-    孤舟蓑笠翁，獨釣寒江雪。
-  </div>
-</div>
+const chineseCharacterContent = `
+        <article>
+          <div class="poem">
+            <div class="poem-title">《江雪》<i class="poet">柳宗元</i></div>
+            <div class="poem-content">
+              千山鸟飞绝，万径人踪灭。<br/>
+              孤舟蓑笠翁，独钓寒江雪。
+            </div>
+          </div>
+        </article>
+        <article>
+          <div class="poem">
+            <div class="poem-title">《江雪》<i class="poet">柳宗元</i></div>
+            <div class="poem-content">
+              千山鳥飛絕，萬徑人蹤滅。<br/>
+              孤舟蓑笠翁，獨釣寒江雪。
+            </div>
+          </div>
+        </article>
 `;
 
 const englishCharacterContent = `<div class="poem-content" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</div>`
@@ -50,22 +55,29 @@ const generatePreviewHTMLContent = (fontPath, fileName, character = chineseChara
     html { height: 100%; }
     body, pre, .poem { font-family: 'CustomFont', sans-serif; }
     body { margin: 0; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: #282828;}
-    pre { margin: 0; padding: 0; font-size: 16px;}
     .poem { text-align: center; line-height: 1.5; margin: 20px auto; }
-    .poem-title { font-size: 32px; margin-bottom: 3px; }
-    .poet { font-size: 18px; margin-bottom: 6px; color: #838383; position: absolute; margin-top: 6px;}
-    .poem-content { font-size: 32px; }
-    .poster { text-align: center; font-size: 38px; color: #ffffff; }
+    .poet { font-size: 0.65em; margin-bottom: 6px; color: #838383; position: absolute; margin-top: 6px;}
+    .poem-title { font-size: 0.96em; margin-bottom: 3px; }
+    .poem-content { font-size: 0.96em; line-height: 1; }
+    .poster { text-align: center; font-size: 42px; color: #ffffff; width: 1200px; height: 630px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+    .poster pre { margin: 0; padding: 0 1em; font-size: 0.95em; line-height: 1; white-space: pre-wrap; }
+    .poster main { display: flex; justify-content: center; gap: 24px; }
+    .poster > div { display: flex; flex-direction: column; gap: 12px; }
+    .poster section { display: flex; flex-direction: column; gap: 0.3em; }
   </style>
   <title>Font Preview</title>
 </head>
 <body>
   <div class="poster">
-    <div>「${fileName}」</div>
-    ${character}
-    <pre>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre>
-    <pre>a b c d e f g h i j k l m n o p q r s t u v w x y z</pre>
-    <pre>0 1 2 3 4 5 6 7 8 9</pre>
+    <div>
+      <div>「${fileName}」</div>
+      <main>${character}</main>
+      <section>
+        <pre>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre>
+        <pre>a b c d e f g h i j k l m n o p q r s t u v w x y z</pre>
+        <pre>0 1 2 3 4 5 6 7 8 9</pre>
+      </section>
+    </div>
   </div>
 </body>
 </html>
@@ -109,7 +121,8 @@ export const generateHTMLContent = (fontPath, fileName) => `<!DOCTYPE html><html
 </html>
 `;
 
-export async function createPosterImage(page, filePath, fontName = "") {
+export async function createPosterImage(browser, filePath, fontName = "") {
+  const page = await browser.newPage();
   const fontPath = path.relative(__dirname, path.resolve(filePath)).split(path.sep).join("/");
   const htmlFilePath = path.join(__dirname, 'poster.html');
   /// 英文字体
@@ -119,34 +132,38 @@ export async function createPosterImage(page, filePath, fontName = "") {
   fs.writeFileSync(htmlFilePath, htmlContent);
 
   const fileHTMLPath = `file:${htmlFilePath}`;
-  await page.goto(fileHTMLPath, { waitUntil: 'networkidle2' });
-  const width = 420;
-  const height = 180;
-  const deviceScaleFactor = 1;
-  await page.setViewport({ width: width, height: height, deviceScaleFactor });
-  const buffer = await page.screenshot({ type: 'jpeg' });
-  const fileName = `docs/images/${fontName}-poster.jpg`;
-  fs.writeFileSync(fileName, buffer);
-  console.log(`Image created and saved as \x1b[32;1m${fileName}\x1b[0m! ${filePath}`);
+  try {
+    await page.goto(fileHTMLPath, { waitUntil: 'networkidle2' });
+    const width = 420;
+    const height = 180;
+    const deviceScaleFactor = 1;
+    await page.setViewport({ width: width, height: height, deviceScaleFactor });
+    const buffer = await page.screenshot({ type: 'jpeg' });
+    const fileName = `docs/images/${fontName}-poster.jpg`;
+    fs.writeFileSync(fileName, buffer);
+    console.log(`Image created and saved as \x1b[32;1m${fileName}\x1b[0m! ${filePath}`);
 
-  const htmlPreviewFilePath = path.join(__dirname, 'preview.html');
-  const htmlPreviewContent = generatePreviewHTMLContent(fontPath, fontText.replace(/-/g, " "), isEnglish ? englishCharacterContent : chineseCharacterContent);
-  fs.writeFileSync(htmlPreviewFilePath, htmlPreviewContent);
-  const filePreviewHTMLPath = `file:${htmlPreviewFilePath}`;
-  await page.goto(filePreviewHTMLPath, { waitUntil: 'networkidle2' });
-  const previewWidth = 760;
-  const previewHeight = isEnglish ? 320 : 560;
-  const previewDeviceScaleFactor = 2;
-  await page.setViewport({ width: previewWidth, height: previewHeight, deviceScaleFactor: previewDeviceScaleFactor});
-  const previewBuffer = await page.screenshot({ type: 'jpeg' });
-  const filePreviewName = `docs/images/${fontName}-preview.jpg`;
-  fs.writeFileSync(filePreviewName, previewBuffer);
-  console.log(`Image created and saved as \x1b[32;1m${filePreviewName}\x1b[0m! ${filePath}`);
+    const htmlPreviewFilePath = path.join(__dirname, 'preview.html');
+    const htmlPreviewContent = generatePreviewHTMLContent(fontPath, fontText.replace(/-/g, " "), isEnglish ? englishCharacterContent : chineseCharacterContent);
+    fs.writeFileSync(htmlPreviewFilePath, htmlPreviewContent);
+    const filePreviewHTMLPath = `file:${htmlPreviewFilePath}`;
+    await page.goto(filePreviewHTMLPath, { waitUntil: 'networkidle2' });
+    const previewWidth = isEnglish ? 800 : 1200;
+    const previewHeight = isEnglish ? 450 : 675;
+    const previewDeviceScaleFactor = 2;
+    await page.setViewport({ width: previewWidth, height: previewHeight, deviceScaleFactor: previewDeviceScaleFactor});
+    const previewBuffer = await page.screenshot({ type: 'jpeg' });
+    const filePreviewName = `docs/images/${fontName}-preview.jpg`;
+    fs.writeFileSync(filePreviewName, previewBuffer);
+    console.log(`Image created and saved as \x1b[32;1m${filePreviewName}\x1b[0m! ${filePath}`);
+  } finally {
+    await page.close();
+  }
 }
 
 export async function getFontFiles(dirPath) {
   let fontFiles = [];
-  const fontExtensions = ['.ttf', '.otf'];
+  const fontExtensions = ['.ttf', '.otf', 'ttc'];
   async function traverseDirectory(currentPath) {
     const entries = await fs.readdir(currentPath, { withFileTypes: true });
     for (let entry of entries) {

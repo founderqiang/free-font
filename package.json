@@ -9,7 +9,7 @@
     "url": "https://github.com/jaywcjlove/free-font"
   },
   "scripts": {
-    "all": "node scripts/main.mjs && npm run start",
+    "all": "node --expose-gc --max-old-space-size=8192 scripts/main.mjs && npm run start",
     "one:info": "node scripts/main.mjs -i",
     "one:info:all": "node scripts/main.mjs -info",
     "one": "node scripts/main.mjs -a",

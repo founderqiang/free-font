@@ -8,13 +8,25 @@ import { openSync } from 'fontkit';
 import { createPosterImage, removeRootPathSegment, getFontFiles, outputDir, extractVersion, getTTCFontsInfo, copyrightFormat } from './utils.mjs';
 
 const fontDatas = createRequire(import.meta.url)("./data.json");
+const BROWSER_RESTART_INTERVAL = 20;
+
+async function createPageContext() {
+  const browser = await puppeteer.launch();
+  return { browser };
+}
+
+async function closePageContext(context) {
+  if (!context) return;
+  await context.browser.close();
+}
 
 ;(async () => {
   let argv = process.argv;
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  let pageContext = null;
+  let shouldWriteDataJson = false;
   /// 获取单个字体信息
   if (argv.includes("-i")) {
+    shouldWriteDataJson = true;
     let fontPath = argv[argv.length - 1]
     if (!!fontPath && fontPath !== "-i") {
       const resultData = [...fontDatas];
@@ -34,6 +46,7 @@ const fontDatas = createRequire(import.meta.url)("./data.json");
   }
   /// 获取所有字体信息
   if (argv.includes("-info")) {
+    shouldWriteDataJson = true;
     const resultData = [...fontDatas];
     for (const item in resultData) {
       const fontPath = path.join(outputDir, resultData[item].path);
@@ -49,6 +62,8 @@ const fontDatas = createRequire(import.meta.url)("./data.json");
     return process.exit(1);
   }
   if (argv.includes("-a")) {
+    shouldWriteDataJson = true;
+    pageContext = await createPageContext();
     let fontPath = argv[argv.length - 1]
     if (!!fontPath && fontPath !== "-a") {
       let fontName = path.basename(fontPath, path.extname(fontPath)).trim();
@@ -89,18 +104,19 @@ const fontDatas = createRequire(import.meta.url)("./data.json");
           resultData[dataIndex].copyright = copyrightFormat(font.copyright || ttcFonts[0]?.copyright)
           resultData[dataIndex].numGlyphs = font.numGlyphs || ttcFonts[0]?.numGlyphs
         }
-        await createPosterImage(page, fontPath, fontName);
+        await createPosterImage(pageContext.browser, fontPath, fontName);
         fs.writeFileSync("./scripts/data.json", JSON.stringify(resultData, null, 2));
       }
     } else {
       console.log("Please enter a font file path");
     }
   } else {
+    pageContext = await createPageContext();
     // create all images
     await fs.emptyDir('docs/images');
     const files = await getFontFiles("./docs/fonts");
     const resultData = []
-    for (const filename of files) {
+    for (const [index, filename] of files.entries()) {
       let fontName = path.basename(filename, path.extname(filename)).trim();
       if (!fontName.startsWith("__")) {
         const stat = fs.statSync(filename);
@@ -111,7 +127,7 @@ const fontDatas = createRequire(import.meta.url)("./data.json");
         data.byte = stat.size
         data.ctime = stat.ctime.getTime();
         const font = openSync(filename);
-        const ttcFonts = (font.type.toLocaleLowerCase() == "ttc") ? getTTCFontsInfo(fontPath) : [];
+        const ttcFonts = (font.type.toLocaleLowerCase() == "ttc") ? getTTCFontsInfo(filename) : [];
         data.postscriptName = font.postscriptName
         data.fullName = font.fullName
         data.familyName = font.familyName
@@ -120,12 +136,22 @@ const fontDatas = createRequire(import.meta.url)("./data.json");
         data.copyright = copyrightFormat(font.copyright || ttcFonts[0]?.copyright)
         data.numGlyphs = font.numGlyphs || ttcFonts[0]?.numGlyphs
         resultData.push(data);
-        await createPosterImage(page, filename, fontName);
+        await createPosterImage(pageContext.browser, filename, fontName);
+
+        if ((index + 1) % BROWSER_RESTART_INTERVAL === 0) {
+          await closePageContext(pageContext);
+          pageContext = await createPageContext();
+        }
+        if (global.gc && (index + 1) % BROWSER_RESTART_INTERVAL === 0) {
+          global.gc();
+        }
       } else {
         console.log(`Skip 2 font file: \x1b[35;1m ${filename} \x1b[0m"`);
       }
     }
-    fs.writeFileSync("./scripts/data.json", JSON.stringify(resultData, null, 2));
+    if (shouldWriteDataJson) {
+      fs.writeFileSync("./scripts/data.json", JSON.stringify(resultData, null, 2));
+    }
   }
-  await browser.close();
+  await closePageContext(pageContext);
 })();

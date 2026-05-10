@@ -203,6 +203,11 @@ export default {
     // if (isWatch == true) {
     //   return html;
     // }
+    // Skip expensive minify/prettier for detail pages (1000+ files)
+    // to avoid memory pressure during batch template generation
+    if (output && output.includes('/details/')) {
+      return html;
+    }
     const minHTML = await minify(html, {
         collapseWhitespace: true,
         preserveLineBreaks: true,
