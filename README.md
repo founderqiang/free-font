@@ -8,7 +8,7 @@
   <a target="_blank" href="https://github.com/jaywcjlove/vidwall-hub" title="Vidwall Hub for macOS"><img alt="Vidwall Hub" height="52" src="./docs/appicon/vidwall-hub.png"></a>
   <a target="_blank" href="https://apps.apple.com/app/VidCrop/6752624705" title="VidCrop for macOS"><img alt="VidCrop" height="52" src="./docs/appicon/vidcrop.png"></a>
   <a target="_blank" href="https://apps.apple.com/app/Vidwall/6747587746" title="Vidwall for macOS"><img alt="Vidwall" height="52" src="./docs/appicon/vidwall.png"></a>
-  <a target="_blank" href="./docs/mousio-hint/" title="Mousio Hint for macOS"><img alt="Mousio Hint" height="52" src="./docs/appicon/mousio-hint.png"></a>
+  <a target="_blank" href="https://wangchujiang.com/mousio-hint/" title="Mousio Hint for macOS"><img alt="Mousio Hint" height="52" src="./docs/appicon/mousio-hint.png"></a>
   <a target="_blank" href="https://apps.apple.com/app/6746747327" title="Mousio for macOS"><img alt="Mousio" height="52" src="./docs/appicon/mousio.png"></a>
   <a target="_blank" href="https://apps.apple.com/app/6745227444" title="Musicer for macOS"><img alt="Musicer" height="52" src="./docs/appicon/musicer.png"></a>
   <a target="_blank" href="https://apps.apple.com/app/6743841447" title="Audioer for macOS"><img alt="Audioer" height="52" src="./docs/appicon/audioer.png"></a>
