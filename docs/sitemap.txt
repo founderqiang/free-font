@@ -8,6 +8,8 @@ https://wangchujiang.com/free-font/hei.html
 https://wangchujiang.com/free-font/handwriting.html
 https://wangchujiang.com/free-font/english.html
 https://wangchujiang.com/free-font/art.html
+https://wangchujiang.com/free-font/details/快去写作业CJKMono-Regular.html
+https://wangchujiang.com/free-font/details/快去写作业CJK-Regular.html
 https://wangchujiang.com/free-font/details/DottedSongtiSquareRegular.html
 https://wangchujiang.com/free-font/details/DottedSongtiDiamondRegular.html
 https://wangchujiang.com/free-font/details/DottedSongtiCircleRegular.html
@@ -1036,6 +1038,8 @@ https://wangchujiang.com/free-font/details/阿里妈妈方圆体.html
 https://wangchujiang.com/free-font/details/阿里妈妈东方大楷.html
 https://wangchujiang.com/free-font/details/阿里妈妈刀隶体.html
 
+https://wangchujiang.com/free-font/preview.html?p=fonts/快去写作业/快去写作业CJKMono-Regular.ttf&s=23.4%20MB&t=快去写作业CJKMono-Regular&l=OFL-1.1
+https://wangchujiang.com/free-font/preview.html?p=fonts/快去写作业/快去写作业CJK-Regular.ttf&s=25.1%20MB&t=快去写作业CJK-Regular&l=OFL-1.1
 https://wangchujiang.com/free-font/preview.html?p=fonts/点点像素/DottedSongtiSquareRegular.otf&s=9.47%20MB&t=DottedSongtiSquareRegular&l=GPL-2.0
 https://wangchujiang.com/free-font/preview.html?p=fonts/点点像素/DottedSongtiDiamondRegular.otf&s=8.04%20MB&t=DottedSongtiDiamondRegular&l=GPL-2.0
 https://wangchujiang.com/free-font/preview.html?p=fonts/点点像素/DottedSongtiCircleRegular.otf&s=6.93%20MB&t=DottedSongtiCircleRegular&l=GPL-2.0
