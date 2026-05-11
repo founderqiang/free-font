@@ -1,5 +1,21 @@
 [
   {
+    "name": "白路彤彤手写体",
+    "path": "fonts/其他字体/白路彤彤手写体.ttf",
+    "home": "https://www.zcool.com.cn/work/ZNjkxNjU3MzI=.html",
+    "type": "手绘体",
+    "size": "3.58 MB",
+    "byte": 3577220,
+    "ctime": 1778524647693,
+    "postscriptName": "bailutongtongshouxieti",
+    "fullName": "bailutongtongshouxieti",
+    "familyName": "bailutongtongshouxieti",
+    "subfamilyName": "Regular",
+    "version": "1.000",
+    "copyright": "copyright: bailu",
+    "numGlyphs": 6992
+  },
+  {
     "name": "天王星像素",
     "path": "fonts/其他字体/天王星像素.ttf",
     "size": "1.34 MB",
