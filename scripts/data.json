@@ -1,5 +1,37 @@
 [
   {
+    "name": "ServerMono-RegularOblique",
+    "path": "fonts/english/ServerMono/ServerMono-RegularOblique.otf",
+    "home": "https://servermono.com/",
+    "license": "OFL-1.1",
+    "size": "37.5 kB",
+    "byte": 37492,
+    "ctime": 1778494063509,
+    "postscriptName": "ServerMono-RegularOblique",
+    "fullName": "Server Mono Regular Oblique",
+    "familyName": "Server Mono",
+    "subfamilyName": "Italic",
+    "version": "1.200",
+    "copyright": "Copyright ©2025 by Internet Development Studio. All rights reserved.",
+    "numGlyphs": 604
+  },
+  {
+    "name": "ServerMono-Regular",
+    "path": "fonts/english/ServerMono/ServerMono-Regular.otf",
+    "home": "https://servermono.com/",
+    "license": "OFL-1.1",
+    "size": "41.8 kB",
+    "byte": 41792,
+    "ctime": 1778494063477,
+    "postscriptName": "ServerMono-Regular",
+    "fullName": "Server Mono Regular",
+    "familyName": "Server Mono",
+    "subfamilyName": "Regular",
+    "version": "1.200",
+    "copyright": "Copyright ©2025 by Internet Development Studio. All rights reserved.",
+    "numGlyphs": 604
+  },
+  {
     "name": "EVA明体简体",
     "path": "fonts/其他字体/EVA明体简体.otf",
     "home": "https://github.com/kaonashi-tyc/Eva-Ming-Simplified",
