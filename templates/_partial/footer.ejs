@@ -14,7 +14,16 @@
   <div>
     Made by<a href="https://jaywcjlove.github.io/#/sponsor" target="_blank"> 小弟调调™ </a>with<span class="heart"> ❤</span></span>
   </div>
-  <time datetime="<%=NOW_DATE.toLocaleDateString()%>">上次更新于：<%=NOW_DATE.toLocaleDateString()%></time>
+  <time id="update-time">上次更新于：加载中...</time>
+  <script src="<%= PUBLIC_PATH %>js/last-update.js"></script>
+  <script>
+    if (window.LAST_UPDATE_DATE) {
+      const timeEl = document.getElementById('update-time');
+      const dateStr = window.LAST_UPDATE_DATE.toLocaleDateString();
+      timeEl.textContent = '上次更新于：' + dateStr;
+      timeEl.dateTime = dateStr;
+    }
+  </script>
 </footer>
 </body>
 </html>
