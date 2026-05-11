@@ -1,5 +1,22 @@
 [
   {
+    "name": "天王星像素",
+    "path": "fonts/其他字体/天王星像素.ttf",
+    "size": "1.34 MB",
+    "home": "https://github.com/scott0107000/Uranus-Pixel",
+    "license": "GPL-3.0",
+    "type": "艺术体",
+    "byte": 1344764,
+    "ctime": 1778524013051,
+    "postscriptName": "Uranus_Pixel_11Px",
+    "fullName": "Uranus_Pixel_11Px",
+    "familyName": "Uranus Pixel 11Px",
+    "subfamilyName": "regular",
+    "version": null,
+    "copyright": "本字体版权为 “文泉驿信任委员会（Board of Trustees）” , FangQ 和 Firefly 所有。字体授权继承文泉驿点阵宋体所采用的 GNU Public License v2 （附加允许文档嵌入条款），详情请参照文泉驿 README 文件（https://raw.githubusercontent.com/AmusementClub/WenQuanYi-Bitmap-Song-TTF/master/Original%20Fonts/README）。",
+    "numGlyphs": 7645
+  },
+  {
     "name": "快去写作业CJKMono-Regular",
     "path": "fonts/快去写作业/快去写作业CJKMono-Regular.ttf",
     "home": "https://github.com/Partyb0ssishere/cef-fonts-cjk",
