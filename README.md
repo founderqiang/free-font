@@ -1,3 +1,18 @@
+<div align="center" markdown="1">
+  <sup>特别感谢：</sup>
+  <br>
+  <br>
+  
+  <a href="https://github.com/Doloffer-g/guide">
+    <img alt="doloffer sponsorship" width="400" src="https://jaywcjlove.github.io/sponsor/doloffer.jpg">
+  </a>
+  <br>
+  <a href="https://github.com/Doloffer-g/guide"><b>DolOffer - 一站式数字订阅充值平台</b></a><br>
+  <a href="https://doloffer.com">主营 GPT、Claude 等 AI 多类数字服务会员正版订阅，9 折优惠码 AI8888，极速发货，售后无忧</a><br><br>
+
+</div>
+<hr>
+
 <div markdown="1">
   <sup>使用<a href="https://wangchujiang.com/#/app" target="_blank">我的应用</a>，也是对我的<a href="https://wangchujiang.com/#/sponsor" target="_blank">支持</a>：</sup>
   <br>
