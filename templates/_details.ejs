@@ -12,6 +12,7 @@
   <div id="preview">
     <img src="<%= PUBLIC_PATH %>images/<%- name %>-preview.jpg" alt="<%- name %>字体预览" />
   </div>
+  <%- include('./_partial/sponsorship', { }); %>
   <div class="download" id="downloads">
     <% if (typeof officialDownload !== 'undefined' && officialDownload == true) { %>
     <a href="<%- home %>" target="_blank" class="baidu">
